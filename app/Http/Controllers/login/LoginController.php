@@ -4,12 +4,13 @@ namespace App\Http\Controllers\login;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+//use App\Model\User;
 use App\Model\User;
 
-class LoginController extends Controller
+class loginController extends Controller
 {
     public function register(){
-        return view('Login/register');
+        return view('login/register');
     }
     public function registerto(){
         $data = $_POST;
@@ -22,29 +23,29 @@ class LoginController extends Controller
         }
         $res=User::insert($data);
         if ($res){
-            return redirect("/Login/login");
+            return redirect("/login/login");
         }else{
-            return redirect("/Login/register");
+            return redirect("/login/register");
         }
 
     }
-    public function Login(){
-        return view('Login/login');
+    public function login(){
+        return view('login/login');
     }
     public function Loginto(){
         $data=\request()->all();
         $name=\request()->post("name");
-        //dd($name);
+//        dd($data);
         unset($data['_token']);
         $res=User::where('name',$data['name'])->first();
         if ($res){
             if ($res['password']==md5($data['password'])){
                 return view("/Index/index",['name'=>$name]);
             }else{
-                return redirect("/Login/login");
+                return redirect("/login/login");
             }
         }else{
-            return redirect("/Login/login");
+            return redirect("/login/login");
         }
 
     }

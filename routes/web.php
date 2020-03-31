@@ -12,10 +12,11 @@
 */
 //
 Route::get('/', function () {
-    return view('index');
+    return view('Index/index');
 });
-//Route::get('/', function () {
-//    return view('Index/Index');
-//});
 
-//Route::get('/register','Index\IndexController@Index');
+Route::get('login/register','login\LoginController@register');
+Route::post('login/registerto','login\LoginController@registerto');
+Route::get('login/login','login\LoginController@login');
+Route::post('login/loginto','login\LoginController@loginto');
+Route::any('Index/index','login\IndexController@index');
