@@ -40,13 +40,24 @@ class loginController extends Controller
         $res=User::where('name',$data['name'])->first();
         if ($res){
             if ($res['password']==md5($data['password'])){
-                return view("/Index/index",['name'=>$name]);
+                return view("/Index/index2",['name'=>$name]);
             }else{
                 return redirect("/login/login");
             }
         }else{
             return redirect("/login/login");
         }
+
+    }
+    public function code(){
+        return view('login/code');
+    }
+    public function codeto()
+    {
+        include '/phpqrcode.php';
+        $uid =uniqid();
+        echo $uid;die;
+
 
     }
 }
